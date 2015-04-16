@@ -1,50 +1,25 @@
 from enum import Enum
 
-class OrderedEnum(Enum):
+class Color(Enum):
     """
-    an enumeration class that has a well ordering
+    A class representing the colors in magic the gathering.
+    Colorless is not a color. See Rule 203.2c.
     """
-    def __init__(self, value: int):
-        self.value = value
-
-    def __ge__(self, other):
-        if self.__class__ is other.__class__:
-            return self.value >= other.value
-        return NotImplemented
-
-    def __le__(self, other):
-        if self.__class__ is other.__class__:
-            return self.value <= other.value
-        return NotImplemented
-
-    def __lt__(self, other):
-        if self.__class__ is other.__class__:
-            return self.value < other.value
-        return NotImplemented
-
-    def __gt__(self, other):
-        if self.__class__ is other.__class__:
-            return self.value > other.value
-        return NotImplemented
+    white = "white", "w"
+    blue = "blue", "u"
+    black = "black", "b"
+    red = "red", "r"
+    green = "green", "g"
 
 
-class Color(OrderedEnum):
-    white = 0, "white", "w"
-    blue = 1, "blue", "u"
-    black = 2, "black", "b"
-    red = 3, "red", "r"
-    green = 4, "green", "g"
-
-
-    def __init__(self, value: int, long_name: str, abbreviation: str):
+    def __init__(self, long_name: str, abbreviation: str) -> None:
         """
-        :param value: a value used for ordering/comparison of the colors
         :param long_name: the full name of the color
         :param abbreviation: color abbreviation
-        :return:
+        :return: None
         """
         self.long_name = long_name
         self.abbreviation = abbreviation
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.__class__.__name__) + " " + self.long_name
